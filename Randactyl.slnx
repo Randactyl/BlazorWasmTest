@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/.github/" Id="ed3e247d-d53b-4b47-b3e1-1a05edb66074" />
+  <Folder Name="/.github/workflows/" Id="d6a6603a-f2da-4a8d-816c-0240ff39f96f">
+    <File Path=".github/workflows/main.yml" />
+  </Folder>
+  <Folder Name="/src/" Id="d19b7bb9-a3b6-4290-bcf1-a6652932a9bc">
+    <Project Path="src/Randactyl.BlazorWasm/Randactyl.BlazorWasm.csproj" Id="bd2a9304-be1d-4975-9c46-2258b68185dc" />
+  </Folder>
+</Solution>
