@@ -7,6 +7,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Get repo name
+        id: repo-name
+        uses: MariachiBear/get-repo-name-action@v1
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v1
         with:
@@ -19,6 +22,11 @@ jobs:
         run: dotnet publish src/Randactyl.BlazorWasm/Randactyl.BlazorWasm.csproj -c Release -o release --nologo
       - name: Add .nojekyll file
         run: touch release/wwwroot/.nojekyll
+      # changes the base-tag in index.html from '/' to 'BlazorGitHubPagesDemo' to match GitHub Pages repository subdirectory
+      - name: Change base-tag in index.html from / to /${{ steps.repo-name.outputs.repository-name }}/
+        run: sed -i 's/<base href="\/" \/>/<base href="\/${{ steps.repo-name.outputs.repository-name }}\/" \/>/g' release/wwwroot/index.html
+      - name: Change base path in service-worker.published.js from / to ${{ steps.repo-name.outputs.repository-name }}
+        run: sed -i 's/const base = \"\/\"/const base = \"\/${{ steps.repo-name.outputs.repository-name }}\/\"/g' release/wwwroot/service-worker.published.js
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
